@@ -44,11 +44,7 @@
     font-family: 'Inter', sans-serif;
   }
   .tab-btn:hover { background: var(--bg); }
-  .tab-btn.active {
-    background: var(--green);
-    border-color: var(--green);
-    color: #fff;
-  }
+  .tab-btn.active { background: var(--green); border-color: var(--green); color: #fff; }
   .tab-icon { font-size: 20px; display: block; margin-bottom: 3px; }
   .tab-name { font-size: 13px; font-weight: 500; display: block; }
   .tab-price { font-size: 11px; opacity: 0.7; display: block; margin-top: 1px; }
@@ -59,152 +55,98 @@
   .panel.active { display: block; animation: fadeIn 0.2s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
  
-  .panel-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-  }
+  .panel-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
  
-  .panel-header {
-    background: var(--green);
-    padding: 12px 16px;
-  }
-  .panel-header h2 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 2px;
-  }
+  .panel-header { background: var(--green); padding: 12px 16px; }
+  .panel-header h2 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 2px; }
   .panel-header p { font-size: 11.5px; color: rgba(255,255,255,0.7); }
  
   /* ── TWO-COLUMN BODY ── */
-  .panel-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-  }
- 
-  .col-inputs {
-    padding: 14px 16px;
-    border-right: 1px solid var(--border);
-  }
+  .panel-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .col-inputs { padding: 14px 16px; border-right: 1px solid var(--border); display: flex; flex-direction: column; }
   .col-results { padding: 14px 16px; }
  
-  .col-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 10px;
-  }
+  .col-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
  
   /* ── SLIDERS ── */
   .slider-group { margin-bottom: 11px; }
-  .slider-row-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 4px;
-  }
+  .slider-row-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .slider-label-wrap { display: flex; align-items: center; gap: 4px; }
   .slider-label { font-size: 12.5px; color: var(--text); }
-  .slider-val {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--green);
-    white-space: nowrap;
-    margin-left: 8px;
-  }
+  .slider-val { font-size: 13px; font-weight: 500; color: var(--green); white-space: nowrap; margin-left: 8px; }
+ 
   input[type="range"] {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 3px;
-    background: var(--border);
-    border-radius: 3px;
-    outline: none;
-    cursor: pointer;
+    -webkit-appearance: none; width: 100%; height: 3px;
+    background: var(--border); border-radius: 3px; outline: none; cursor: pointer;
   }
   input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 15px; height: 15px;
-    border-radius: 50%;
-    background: var(--green);
-    border: 2px solid #fff;
-    box-shadow: 0 1px 4px rgba(33,53,38,0.35);
-    cursor: pointer;
+    -webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%;
+    background: var(--green); border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(33,53,38,0.35); cursor: pointer;
   }
   input[type="range"]::-moz-range-thumb {
-    width: 15px; height: 15px;
-    border-radius: 50%;
-    background: var(--green);
-    border: 2px solid #fff;
+    width: 15px; height: 15px; border-radius: 50%;
+    background: var(--green); border: 2px solid #fff;
   }
+ 
+  /* ── TOOLTIP ── */
+  .tip-wrap { position: relative; display: inline-flex; align-items: center; }
+  .tip-icon {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--border); color: var(--text-muted);
+    font-size: 9px; font-weight: 600; font-style: normal;
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: help; flex-shrink: 0; user-select: none;
+    font-family: 'Inter', sans-serif;
+  }
+  .tip-box {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--green);
+    color: #fff;
+    font-size: 11px;
+    line-height: 1.5;
+    padding: 7px 10px;
+    border-radius: 7px;
+    width: 200px;
+    z-index: 100;
+    pointer-events: none;
+    font-weight: 400;
+  }
+  .tip-box::after {
+    content: '';
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--green);
+  }
+  .tip-wrap:hover .tip-box { display: block; }
  
   /* ── ROI HERO ── */
   .roi-hero {
-    background: var(--green);
-    border-radius: 9px;
-    padding: 11px 13px;
-    margin-bottom: 9px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
+    background: var(--green); border-radius: 9px; padding: 11px 13px; margin-bottom: 9px;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
   }
   .roi-label { font-size: 10px; color: rgba(255,255,255,0.6); margin-bottom: 2px; }
-  .roi-val {
-    font-family: 'Fraunces', serif;
-    font-size: 1.65rem;
-    font-weight: 600;
-    color: #fff;
-    line-height: 1;
-  }
+  .roi-val { font-family: 'Fraunces', serif; font-size: 1.65rem; font-weight: 600; color: #fff; line-height: 1; }
   .roi-sub { font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 3px; }
-  .roi-badge {
-    background: var(--green-light);
-    color: var(--green);
-    border-radius: 8px;
-    padding: 7px 12px;
-    text-align: center;
-    flex-shrink: 0;
-  }
-  .roi-badge .mult {
-    font-family: 'Fraunces', serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    display: block;
-    line-height: 1;
-  }
+  .roi-badge { background: var(--green-light); color: var(--green); border-radius: 8px; padding: 7px 12px; text-align: center; flex-shrink: 0; }
+  .roi-badge .mult { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; display: block; line-height: 1; }
   .roi-badge .mult-label { font-size: 10px; display: block; margin-top: 2px; opacity: 0.8; }
  
   /* ── METRICS ── */
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    margin-bottom: 10px;
-  }
-  .metric {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    padding: 8px 10px;
-  }
+  .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+  .metric { background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 8px 10px; }
   .metric-label { font-size: 10px; color: var(--text-muted); margin-bottom: 2px; }
   .metric-val { font-size: 15px; font-weight: 500; color: var(--text); }
   .metric-sub { font-size: 10px; color: var(--text-muted); margin-top: 1px; }
  
   /* ── BARS ── */
-  .bars-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 6px;
-  }
+  .bars-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
   .bar-item { margin-bottom: 6px; }
   .bar-top { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 3px; }
   .bar-top span:last-child { font-weight: 500; color: var(--text); }
@@ -212,41 +154,60 @@
   .bar-fill { height: 100%; background: var(--green); border-radius: 5px; transition: width 0.35s cubic-bezier(.4,0,.2,1); }
   .bar-fill.accent { background: var(--green-light); border: 1px solid #c5d9a8; }
  
-  /* ── SOURCES ── */
+  /* ── SOURCES BUTTON ── */
   .sources-toggle-btn {
-    background: none; border: none;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px; color: var(--green);
-    cursor: pointer;
-    display: flex; align-items: center; gap: 4px;
-    padding: 0; margin-top: 8px;
+    background: none; border: none; font-family: 'Inter', sans-serif;
+    font-size: 11px; color: var(--green); cursor: pointer;
+    display: flex; align-items: center; gap: 4px; padding: 0; margin-top: auto; padding-top: 12px;
   }
-  .sources-toggle-btn svg { transition: transform 0.2s; }
-  .sources-toggle-btn.open svg:last-child { transform: rotate(180deg); }
-  .sources-box {
-    display: none;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    padding: 9px 11px;
-    font-size: 11px;
-    color: var(--text-muted);
-    line-height: 1.65;
-    margin-top: 6px;
-  }
-  .sources-box.open { display: block; }
-  .sources-box strong { color: var(--text); }
-  .sources-box a { color: var(--green); text-decoration: none; }
-  .sources-box a:hover { text-decoration: underline; }
-  .sources-box ul { padding-left: 12px; }
-  .sources-box li { margin-bottom: 4px; }
  
-  .note {
-    font-size: 10px;
-    color: var(--text-muted);
-    margin-top: 8px;
-    line-height: 1.5;
+  /* ── MODAL OVERLAY ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
   }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px 22px 18px;
+    max-width: 420px;
+    width: calc(100% - 32px);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    position: relative;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .modal-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem; font-weight: 600; color: var(--text);
+  }
+  .modal-close {
+    background: var(--bg); border: none; border-radius: 50%;
+    width: 26px; height: 26px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--text-muted); flex-shrink: 0;
+    transition: background 0.15s;
+  }
+  .modal-close:hover { background: var(--border); }
+  .modal-box strong { color: var(--text); }
+  .modal-box a { color: var(--green); text-decoration: none; }
+  .modal-box a:hover { text-decoration: underline; }
+  .modal-box ul { padding-left: 14px; margin-top: 6px; }
+  .modal-box li { margin-bottom: 5px; }
+  .modal-section { margin-bottom: 10px; }
+ 
+  .note { font-size: 10px; color: var(--text-muted); margin-top: 8px; line-height: 1.5; }
  
   @media (max-width: 580px) {
     .panel-body { grid-template-columns: 1fr; }
@@ -284,35 +245,69 @@
     <div class="panel-body">
       <div class="col-inputs">
         <div class="col-label">Your situation</div>
+ 
         <div class="slider-group">
           <div class="slider-row-top">
-            <span class="slider-label">Current annual salary</span>
+            <div class="slider-label-wrap">
+              <span class="slider-label">Current annual salary</span>
+              <span class="tip-wrap">
+                <i class="tip-icon">?</i>
+                <span class="tip-box">Your total base salary before taxes. Use your current base pay, not including bonuses.</span>
+              </span>
+            </div>
             <span class="slider-val" id="c-salary-out">$85,000</span>
           </div>
           <input type="range" id="c-salary" min="50000" max="175000" step="5000" value="85000" oninput="calcCoaching()">
         </div>
+ 
         <div class="slider-group">
           <div class="slider-row-top">
-            <span class="slider-label">Expected promotion raise</span>
+            <div class="slider-label-wrap">
+              <span class="slider-label">Expected promotion raise</span>
+              <span class="tip-wrap">
+                <i class="tip-icon">?</i>
+                <span class="tip-box">The % salary increase you'd typically receive at your next promotion level — e.g. Specialist → Manager. SHRM data shows this is usually 18–25%.</span>
+              </span>
+            </div>
             <span class="slider-val" id="c-raise-out">20%</span>
           </div>
           <input type="range" id="c-raise" min="10" max="35" step="1" value="20" oninput="calcCoaching()">
         </div>
+ 
         <div class="slider-group">
           <div class="slider-row-top">
-            <span class="slider-label">Years to promotion without coaching</span>
+            <div class="slider-label-wrap">
+              <span class="slider-label">Years to promotion without coaching</span>
+              <span class="tip-wrap">
+                <i class="tip-icon">?</i>
+                <span class="tip-box">How many years you estimate it would realistically take to reach your next promotion if you continued on your current path without coaching support.</span>
+              </span>
+            </div>
             <span class="slider-val" id="c-years-out">3 yrs</span>
           </div>
           <input type="range" id="c-years" min="1" max="5" step="1" value="3" oninput="calcCoaching()">
         </div>
+ 
         <div class="slider-group">
           <div class="slider-row-top">
-            <span class="slider-label">Months coaching accelerates promotion</span>
+            <div class="slider-label-wrap">
+              <span class="slider-label">How much coaching accelerates promotion</span>
+              <span class="tip-wrap">
+                <i class="tip-icon">?</i>
+                <span class="tip-box">Estimated months coaching moves your promotion timeline forward. HBR research shows structured coaching typically accelerates promotion by 12–18 months.</span>
+              </span>
+            </div>
             <span class="slider-val" id="c-accel-out">9 mo</span>
           </div>
-          <input type="range" id="c-accel" min="3" max="24" step="3" value="9" oninput="calcCoaching()">
+          <input type="range" id="c-accel" min="1" max="60" step="1" value="9" oninput="calcCoaching()">
         </div>
+ 
+        <button class="sources-toggle-btn" onclick="openModal('coaching')">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          How is this calculated?
+        </button>
       </div>
+ 
       <div class="col-results">
         <div class="roi-hero">
           <div>
@@ -329,7 +324,7 @@
           <div class="metric">
             <div class="metric-label">Salary gained sooner</div>
             <div class="metric-val" id="c-accel-gain">$12,750</div>
-            <div class="metric-sub">Early promotion</div>
+            <div class="metric-sub">Early promotion value</div>
           </div>
           <div class="metric">
             <div class="metric-label">Annual salary lift</div>
@@ -344,21 +339,6 @@
         </div>
         <div class="bars-label">5-year breakdown</div>
         <div id="c-bars"></div>
-        <button class="sources-toggle-btn" onclick="toggleSources('c-src',this)">
-          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          How is this calculated?
-          <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-        <div id="c-src" class="sources-box">
-          <strong>Methodology:</strong> Acceleration gain = (annual lift ÷ 12) × months accelerated. 5-year return = acceleration gain + (annual lift × 5). Lifetime = annual lift × years to 65.<br><br>
-          <strong>Sources:</strong>
-          <ul>
-            <li><a href="https://www.shrm.org/topics-tools/research/total-rewards" target="_blank">SHRM Total Rewards</a> — Specialist→Manager typically gains 18–25%</li>
-            <li><a href="https://coachingfederation.org/research/global-coaching-study" target="_blank">ICF Global Coaching Study 2019</a> — median coaching ROI is 7×</li>
-            <li><a href="https://hbr.org" target="_blank">Harvard Business Review</a> — coached professionals advance 12–18 months faster</li>
-            <li><a href="https://www.bls.gov/ooh/management/human-resources-managers.htm" target="_blank">BLS 2023</a> — HR Managers median $136,350; Specialists $67,650</li>
-          </ul>
-        </div>
         <p class="note">Results are illustrative estimates based on published research. Individual outcomes vary.</p>
       </div>
     </div>
@@ -375,28 +355,55 @@
     <div class="panel-body">
       <div class="col-inputs">
         <div class="col-label">Your situation</div>
+ 
         <div class="slider-group">
           <div class="slider-row-top">
-            <span class="slider-label">Current annual salary</span>
+            <div class="slider-label-wrap">
+              <span class="slider-label">Current annual salary</span>
+              <span class="tip-wrap">
+                <i class="tip-icon">?</i>
+                <span class="tip-box">Your current base salary before taxes. This is the foundation for calculating the earnings lift a skills premium generates over time.</span>
+              </span>
+            </div>
             <span class="slider-val" id="w-salary-out">$80,000</span>
           </div>
           <input type="range" id="w-salary" min="50000" max="175000" step="5000" value="80000" oninput="calcWorkshop()">
         </div>
+ 
         <div class="slider-group">
           <div class="slider-row-top">
-            <span class="slider-label">Workshops per year</span>
+            <div class="slider-label-wrap">
+              <span class="slider-label">Workshops per year</span>
+              <span class="tip-wrap">
+                <i class="tip-icon">?</i>
+                <span class="tip-box">How many workshops you plan to attend annually. Each builds a distinct, stackable skill — the more you attend, the greater the compounded career impact.</span>
+              </span>
+            </div>
             <span class="slider-val" id="w-count-out">3</span>
           </div>
           <input type="range" id="w-count" min="1" max="8" step="1" value="3" oninput="calcWorkshop()">
         </div>
+ 
         <div class="slider-group">
           <div class="slider-row-top">
-            <span class="slider-label">Annual skills premium</span>
+            <div class="slider-label-wrap">
+              <span class="slider-label">Annual skills premium</span>
+              <span class="tip-wrap">
+                <i class="tip-icon">?</i>
+                <span class="tip-box">The estimated % earnings advantage gained from targeted skill-building. WEF research shows professionals who upskill earn 5–12% more than peers in the same role who don't. This reflects the salary edge your expanded skill set creates.</span>
+              </span>
+            </div>
             <span class="slider-val" id="w-premium-out">5%</span>
           </div>
           <input type="range" id="w-premium" min="1" max="15" step="1" value="5" oninput="calcWorkshop()">
         </div>
+ 
+        <button class="sources-toggle-btn" onclick="openModal('workshop')">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          How is this calculated?
+        </button>
       </div>
+ 
       <div class="col-results">
         <div class="roi-hero">
           <div>
@@ -413,7 +420,7 @@
           <div class="metric">
             <div class="metric-label">Annual skills premium</div>
             <div class="metric-val" id="w-annual">$4,000</div>
-            <div class="metric-sub">Earnings lift/yr</div>
+            <div class="metric-sub">Earnings lift per year</div>
           </div>
           <div class="metric">
             <div class="metric-label">Annual workshop cost</div>
@@ -428,21 +435,6 @@
         </div>
         <div class="bars-label">Cumulative value vs. cost</div>
         <div id="w-bars"></div>
-        <button class="sources-toggle-btn" onclick="toggleSources('w-src',this)">
-          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          How is this calculated?
-          <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-        <div id="w-src" class="sources-box">
-          <strong>Methodology:</strong> Annual premium = salary × skills %. 3-year ROI = (premium × 3) − (cost × 3). Lifetime = premium × years to 65.<br><br>
-          <strong>Sources:</strong>
-          <ul>
-            <li><a href="https://www.weforum.org/reports/the-future-of-jobs-report-2023" target="_blank">WEF Future of Jobs 2023</a> — upskilling earns 5–12% above peers</li>
-            <li><a href="https://www.linkedin.com/learning/" target="_blank">LinkedIn Learning 2023</a> — 2.3× more likely promotion-ready with 3+ programs</li>
-            <li><a href="https://www.td.org" target="_blank">ATD research</a> — $4.53 return per $1 in targeted skills training</li>
-            <li><a href="https://www.shrm.org/certification" target="_blank">SHRM</a> — certified HR pros earn 12–17% more than non-certified</li>
-          </ul>
-        </div>
         <p class="note">Results are illustrative estimates based on published research. Individual outcomes vary.</p>
       </div>
     </div>
@@ -459,35 +451,69 @@
     <div class="panel-body">
       <div class="col-inputs">
         <div class="col-label">Your situation</div>
+ 
         <div class="slider-group">
           <div class="slider-row-top">
-            <span class="slider-label">Current annual salary</span>
+            <div class="slider-label-wrap">
+              <span class="slider-label">Current annual salary</span>
+              <span class="tip-wrap">
+                <i class="tip-icon">?</i>
+                <span class="tip-box">Your current base salary. This is the starting point for measuring how much your earnings will grow once you reach your target promotion level.</span>
+              </span>
+            </div>
             <span class="slider-val" id="h-salary-out">$90,000</span>
           </div>
           <input type="range" id="h-salary" min="55000" max="175000" step="5000" value="90000" oninput="calcCohort()">
         </div>
+ 
         <div class="slider-group">
           <div class="slider-row-top">
-            <span class="slider-label">Target salary (Manager / Director)</span>
-            <span class="slider-val" id="h-target-out">$130,000</span>
+            <div class="slider-label-wrap">
+              <span class="slider-label">Expected promotion raise</span>
+              <span class="tip-wrap">
+                <i class="tip-icon">?</i>
+                <span class="tip-box">The % salary increase you expect at your next promotion (e.g. to Manager or Director). BLS data shows HR Managers earn roughly 40–50% more than Specialists. SHRM benchmarks put typical promotion raises at 18–25%.</span>
+              </span>
+            </div>
+            <span class="slider-val" id="h-raise-out">30%</span>
           </div>
-          <input type="range" id="h-target" min="90000" max="200000" step="5000" value="130000" oninput="calcCohort()">
+          <input type="range" id="h-raise" min="10" max="60" step="1" value="30" oninput="calcCohort()">
         </div>
+ 
         <div class="slider-group">
           <div class="slider-row-top">
-            <span class="slider-label">Years to promotion without program</span>
+            <div class="slider-label-wrap">
+              <span class="slider-label">Years to promotion without program</span>
+              <span class="tip-wrap">
+                <i class="tip-icon">?</i>
+                <span class="tip-box">How long you estimate it would take to reach your target role on your own, without the structured support of the Career Accelerator cohort.</span>
+              </span>
+            </div>
             <span class="slider-val" id="h-years-out">4 yrs</span>
           </div>
           <input type="range" id="h-years" min="1" max="7" step="1" value="4" oninput="calcCohort()">
         </div>
+ 
         <div class="slider-group">
           <div class="slider-row-top">
-            <span class="slider-label">Months program accelerates promotion</span>
+            <div class="slider-label-wrap">
+              <span class="slider-label">How much the program accelerates promotion</span>
+              <span class="tip-wrap">
+                <i class="tip-icon">?</i>
+                <span class="tip-box">Estimated months the cohort moves your promotion timeline forward. HBR research shows structured cohort programs with 1:1 mentorship typically accelerate promotion by 12–24 months.</span>
+              </span>
+            </div>
             <span class="slider-val" id="h-accel-out">18 mo</span>
           </div>
-          <input type="range" id="h-accel" min="6" max="30" step="3" value="18" oninput="calcCohort()">
+          <input type="range" id="h-accel" min="1" max="60" step="1" value="18" oninput="calcCohort()">
         </div>
+ 
+        <button class="sources-toggle-btn" onclick="openModal('cohort')">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          How is this calculated?
+        </button>
       </div>
+ 
       <div class="col-results">
         <div class="roi-hero">
           <div>
@@ -503,45 +529,41 @@
         <div class="metrics-grid">
           <div class="metric">
             <div class="metric-label">Salary gained sooner</div>
-            <div class="metric-val" id="h-accel-gain">$60,000</div>
+            <div class="metric-val" id="h-accel-gain">$40,500</div>
             <div class="metric-sub">Acceleration value</div>
           </div>
           <div class="metric">
             <div class="metric-label">Annual salary lift</div>
-            <div class="metric-val" id="h-annual-lift">$40,000</div>
-            <div class="metric-sub">Current → target</div>
+            <div class="metric-val" id="h-annual-lift">$27,000</div>
+            <div class="metric-sub">After promotion</div>
           </div>
           <div class="metric">
             <div class="metric-label">5-yr earnings gap closed</div>
-            <div class="metric-val" id="h-5yr">$200,000</div>
+            <div class="metric-val" id="h-5yr">$135,000</div>
             <div class="metric-sub">Cost of waiting</div>
           </div>
           <div class="metric">
             <div class="metric-label">Lifetime value (to age 65)</div>
-            <div class="metric-val" id="h-lifetime">$1,400,000</div>
+            <div class="metric-val" id="h-lifetime">$945,000</div>
             <div class="metric-sub">~35 career years</div>
           </div>
         </div>
         <div class="bars-label">Where your value comes from</div>
         <div id="h-bars"></div>
-        <button class="sources-toggle-btn" onclick="toggleSources('h-src',this)">
-          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          How is this calculated?
-          <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-        <div id="h-src" class="sources-box">
-          <strong>Methodology:</strong> Annual lift = target − current salary. Acceleration gain = (lift ÷ 12) × months. 5-year = acceleration + (lift × 5). Lifetime = lift × years to 65.<br><br>
-          <strong>Sources:</strong>
-          <ul>
-            <li><a href="https://www.bls.gov/ooh/management/human-resources-managers.htm" target="_blank">BLS 2023</a> — HR Managers median $136,350; TA Directors $120K–$180K</li>
-            <li><a href="https://hbr.org/2019/10/when-senior-leaders-coach" target="_blank">Harvard Business Review</a> — cohort programs accelerate promotion 12–24 months</li>
-            <li><a href="https://www.linkedin.com/business/talent" target="_blank">LinkedIn Economic Graph</a> — cohort learners gain 3.5× more career connections</li>
-            <li><a href="https://www.ccl.org/articles/leading-effectively-articles/executive-presence/" target="_blank">Center for Creative Leadership</a> — executive presence linked to 15–20% salary premium</li>
-          </ul>
-        </div>
         <p class="note">Founding price of $1,600 improves ROI by 31%. Results are illustrative. Individual outcomes vary.</p>
       </div>
     </div>
+  </div>
+</div>
+ 
+<!-- ── SHARED MODAL ── -->
+<div id="src-modal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-title">How is this calculated?</span>
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+    </div>
+    <div id="modal-body"></div>
   </div>
 </div>
  
@@ -551,6 +573,7 @@
  
   function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
   function fmtMult(n) { return n < 1 ? '<1×' : n + '×'; }
+  function fmtAccel(m) { return m < 12 ? m + ' mo' : (m % 12 === 0 ? (m/12) + ' yr' + (m/12 !== 1 ? 's' : '') : Math.floor(m/12) + 'y ' + (m%12) + 'm'); }
  
   function switchTab(id, btn) {
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -560,10 +583,62 @@
     btn.setAttribute('aria-selected','true');
   }
  
-  function toggleSources(id, btn) {
-    document.getElementById(id).classList.toggle('open');
-    btn.classList.toggle('open');
+  const MODAL_CONTENT = {
+    coaching: {
+      title: '1:1 Coaching — How it\'s calculated',
+      html: `
+        <div class="modal-section"><strong>Methodology</strong><br>
+        Annual salary lift = current salary × promotion raise %. Salary gained sooner = (lift ÷ 12) × months coaching accelerates your promotion. 5-year return = salary gained sooner + (lift × 5). Lifetime value = lift × remaining years to age 65.</div>
+        <div class="modal-section"><strong>Data sources</strong>
+        <ul>
+          <li><a href="https://www.shrm.org/topics-tools/research/total-rewards" target="_blank">SHRM Total Rewards</a> — Specialist → Manager typically gains 18–25% in base pay</li>
+          <li><a href="https://coachingfederation.org/research/global-coaching-study" target="_blank">ICF Global Coaching Study 2019</a> — median reported coaching ROI is 7×</li>
+          <li><a href="https://hbr.org" target="_blank">Harvard Business Review</a> — coached professionals advance to senior roles 12–18 months faster on average</li>
+          <li><a href="https://www.bls.gov/ooh/management/human-resources-managers.htm" target="_blank">BLS 2023</a> — HR Managers median $136,350; HR Specialists $67,650</li>
+        </ul></div>`
+    },
+    workshop: {
+      title: 'Workshop — How it\'s calculated',
+      html: `
+        <div class="modal-section"><strong>Methodology</strong><br>
+        Annual skills premium = current salary × premium %. 3-year value = premium × 3. 3-year cost = workshops/yr × $225 × 3. Net 3-year gain = value − cost. Lifetime value = annual premium × remaining years to age 65.</div>
+        <div class="modal-section"><strong>Data sources</strong>
+        <ul>
+          <li><a href="https://www.weforum.org/reports/the-future-of-jobs-report-2023" target="_blank">WEF Future of Jobs 2023</a> — targeted upskilling earns professionals 5–12% above same-role peers</li>
+          <li><a href="https://www.linkedin.com/learning/" target="_blank">LinkedIn Learning 2023</a> — professionals with 3+ programs are 2.3× more likely to be considered promotion-ready</li>
+          <li><a href="https://www.td.org" target="_blank">ATD research</a> — average $4.53 return per $1 invested in targeted skills training</li>
+          <li><a href="https://www.shrm.org/certification" target="_blank">SHRM</a> — certified HR professionals earn 12–17% more than non-certified peers</li>
+        </ul></div>`
+    },
+    cohort: {
+      title: 'Career Accelerator — How it\'s calculated',
+      html: `
+        <div class="modal-section"><strong>Methodology</strong><br>
+        Annual salary lift = current salary × expected raise %. Salary gained sooner = (lift ÷ 12) × months the program accelerates your promotion. 5-year return = salary gained sooner + (lift × 5). Lifetime value = lift × remaining years to age 65.</div>
+        <div class="modal-section"><strong>Data sources</strong>
+        <ul>
+          <li><a href="https://www.bls.gov/ooh/management/human-resources-managers.htm" target="_blank">BLS 2023</a> — HR Managers median $136,350 vs. Specialists $67,650; TA Directors $120K–$180K</li>
+          <li><a href="https://hbr.org/2019/10/when-senior-leaders-coach" target="_blank">Harvard Business Review</a> — cohort programs with 1:1 mentorship accelerate promotion 12–24 months</li>
+          <li><a href="https://www.linkedin.com/business/talent" target="_blank">LinkedIn Economic Graph</a> — cohort learners gain 3.5× more career-relevant connections vs. solo learners</li>
+          <li><a href="https://www.ccl.org/articles/leading-effectively-articles/executive-presence/" target="_blank">Center for Creative Leadership</a> — executive presence linked to 15–20% salary differential at senior HR levels</li>
+        </ul></div>`
+    }
+  };
+ 
+  function openModal(key) {
+    const c = MODAL_CONTENT[key];
+    document.getElementById('modal-title').textContent = c.title;
+    document.getElementById('modal-body').innerHTML = c.html;
+    document.getElementById('src-modal').classList.add('open');
   }
+ 
+  function closeModal() {
+    document.getElementById('src-modal').classList.remove('open');
+  }
+ 
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
  
   function renderBars(id, items) {
     const max = Math.max(...items.map(i => i.val), 1);
@@ -585,7 +660,7 @@
     document.getElementById('c-salary-out').textContent = fmt(salary);
     document.getElementById('c-raise-out').textContent  = Math.round(raise*100) + '%';
     document.getElementById('c-years-out').textContent  = years + ' yr' + (years!==1?'s':'');
-    document.getElementById('c-accel-out').textContent  = accel + ' mo';
+    document.getElementById('c-accel-out').textContent  = fmtAccel(accel);
  
     const lift      = salary * raise;
     const accelGain = lift * (accel / 12);
@@ -644,16 +719,16 @@
  
   function calcCohort() {
     const salary = +document.getElementById('h-salary').value;
-    const target = +document.getElementById('h-target').value;
+    const raise  = +document.getElementById('h-raise').value / 100;
     const years  = +document.getElementById('h-years').value;
     const accel  = +document.getElementById('h-accel').value;
  
     document.getElementById('h-salary-out').textContent = fmt(salary);
-    document.getElementById('h-target-out').textContent = fmt(target);
+    document.getElementById('h-raise-out').textContent  = Math.round(raise*100) + '%';
     document.getElementById('h-years-out').textContent  = years + ' yr' + (years!==1?'s':'');
-    document.getElementById('h-accel-out').textContent  = accel + ' mo';
+    document.getElementById('h-accel-out').textContent  = fmtAccel(accel);
  
-    const lift      = Math.max(0, target - salary);
+    const lift      = salary * raise;
     const accelGain = lift * (accel / 12);
     const fiveYr    = accelGain + lift * 5;
     const fiveYrGap = lift * 5;
