@@ -7,673 +7,551 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
   :root {
     --green: #213526;
     --green-light: #e6efcd;
-    --green-mid: #e6efcd;
-    --green-dark: #213526;
-    --gold: #e6efcd;
-    --gold-light: #e6efcd;
-    --text: #1e1e1e;
-    --text-muted: #908e8b;
-    --text-light: #908e8b;
     --border: #dfdedc;
     --bg: #f2f3f2;
     --white: #ffffff;
-    --shadow: 0 2px 16px rgba(0,0,0,0.07);
-    --shadow-lg: 0 8px 40px rgba(0,0,0,0.10);
+    --text: #1e1e1e;
+    --text-muted: #908e8b;
   }
-
-  html { font-size: 16px; scroll-behavior: smooth; }
-
-  body {
+ 
+  html, body {
     font-family: 'Inter', sans-serif;
-    background: var(--bg);
+    background: transparent;
     color: var(--text);
-    min-height: 100vh;
-    line-height: 1.6;
+    font-size: 14px;
+    line-height: 1.5;
   }
-
-  /* ─── LAYOUT ─────────────────────────────────────────── */
-  .container { max-width: 820px; margin: 0 auto; padding: 0 1.25rem 3rem; }
-
-  /* ─── SERVICE TABS ───────────────────────────────────── */
-  .tabs-wrap { margin: 2rem 0 1.5rem; }
+ 
+  /* ── TABS ── */
   .tabs {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    gap: 7px;
+    margin-bottom: 12px;
   }
   .tab-btn {
     background: var(--white);
     border: 1.5px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 10px;
+    border-radius: 9px;
+    padding: 10px 8px;
     cursor: pointer;
     text-align: center;
-    transition: all 0.2s;
+    transition: all 0.18s;
     font-family: 'Inter', sans-serif;
   }
-  .tab-btn:hover { border-color: var(--border); background: var(--bg); }
+  .tab-btn:hover { background: var(--bg); }
   .tab-btn.active {
     background: var(--green);
     border-color: var(--green);
     color: #fff;
-    box-shadow: 0 4px 14px rgba(26,122,94,0.25);
   }
-  .tab-icon { font-size: 24px; display: block; margin-bottom: 4px; }
+  .tab-icon { font-size: 20px; display: block; margin-bottom: 3px; }
   .tab-name { font-size: 13px; font-weight: 500; display: block; }
-  .tab-price { font-size: 11px; opacity: 0.7; display: block; margin-top: 2px; }
+  .tab-price { font-size: 11px; opacity: 0.7; display: block; margin-top: 1px; }
   .tab-btn.active .tab-price { opacity: 0.85; }
-
-  /* ─── PANEL ──────────────────────────────────────────── */
-  .panel { display: none; animation: fadeIn 0.25s ease; }
-  .panel.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
+ 
+  /* ── PANEL ── */
+  .panel { display: none; }
+  .panel.active { display: block; animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+ 
   .panel-card {
     background: var(--white);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: var(--shadow);
   }
-
+ 
   .panel-header {
-    padding: 1.5rem 1.75rem 1.25rem;
-    border-bottom: 1px solid var(--border);
     background: var(--green);
+    padding: 12px 16px;
   }
   .panel-header h2 {
     font-family: 'Fraunces', serif;
-    font-size: 1.8rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    color: var(--white);
-    margin-bottom: 3px;
+    color: #fff;
+    margin-bottom: 2px;
   }
-  .panel-header p { font-size: 13px; color: var(--bg); }
-
-  .panel-body { padding: 1.75rem; }
-
-  /* ─── SLIDERS ────────────────────────────────────────── */
-  .inputs-section { margin-bottom: 2rem; }
-  .inputs-label {
-    font-size: 11px;
+  .panel-header p { font-size: 11.5px; color: rgba(255,255,255,0.7); }
+ 
+  /* ── TWO-COLUMN BODY ── */
+  .panel-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+ 
+  .col-inputs {
+    padding: 14px 16px;
+    border-right: 1px solid var(--border);
+  }
+  .col-results { padding: 14px 16px; }
+ 
+  .col-label {
+    font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text-light);
-    margin-bottom: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
   }
-  .slider-group { margin-bottom: 1.25rem; }
+ 
+  /* ── SLIDERS ── */
+  .slider-group { margin-bottom: 11px; }
   .slider-row-top {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
-  .slider-label { font-size: 14px; color: var(--text); }
+  .slider-label { font-size: 12.5px; color: var(--text); }
   .slider-val {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 500;
     color: var(--green);
-    min-width: 80px;
-    text-align: right;
+    white-space: nowrap;
+    margin-left: 8px;
   }
   input[type="range"] {
     -webkit-appearance: none;
     width: 100%;
-    height: 4px;
+    height: 3px;
     background: var(--border);
-    border-radius: 4px;
+    border-radius: 3px;
     outline: none;
     cursor: pointer;
   }
   input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
+    width: 15px; height: 15px;
     border-radius: 50%;
     background: var(--green);
     border: 2px solid #fff;
-    box-shadow: 0 1px 6px rgba(26,122,94,0.4);
+    box-shadow: 0 1px 4px rgba(33,53,38,0.35);
     cursor: pointer;
   }
   input[type="range"]::-moz-range-thumb {
-    width: 18px;
-    height: 18px;
+    width: 15px; height: 15px;
     border-radius: 50%;
     background: var(--green);
     border: 2px solid #fff;
-    cursor: pointer;
   }
-
-  /* ─── RESULTS ────────────────────────────────────────── */
-  .results-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 0 0 1.75rem;
-  }
-
+ 
+  /* ── ROI HERO ── */
   .roi-hero {
-    background: var(--green-dark);
-    border-radius: 12px;
-    padding: 1.5rem 1.75rem;
-    margin-bottom: 1.25rem;
-    color: #213526;
+    background: var(--green);
+    border-radius: 9px;
+    padding: 11px 13px;
+    margin-bottom: 9px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
   }
-  .roi-hero-left .roi-label { font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
-  .roi-hero-left .roi-val {
+  .roi-label { font-size: 10px; color: rgba(255,255,255,0.6); margin-bottom: 2px; }
+  .roi-val {
     font-family: 'Fraunces', serif;
-    font-size: clamp(2rem, 6vw, 3rem);
-    font-weight: 500;
-    color: #ffffff;
+    font-size: 1.65rem;
+    font-weight: 600;
+    color: #fff;
     line-height: 1;
   }
-  .roi-hero-left .roi-sub { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 5px; }
+  .roi-sub { font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 3px; }
   .roi-badge {
-    background: var(--gold);
-    color: #213526;
-    border-radius: 10px;
-    padding: 10px 18px;
+    background: var(--green-light);
+    color: var(--green);
+    border-radius: 8px;
+    padding: 7px 12px;
     text-align: center;
     flex-shrink: 0;
   }
-  .roi-badge .mult { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 600; display: block; line-height: 1; }
-  .roi-badge .mult-label { font-size: 11px; opacity: 0.9; display: block; margin-top: 3px; }
-
+  .roi-badge .mult {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: block;
+    line-height: 1;
+  }
+  .roi-badge .mult-label { font-size: 10px; display: block; margin-top: 2px; opacity: 0.8; }
+ 
+  /* ── METRICS ── */
   .metrics-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 10px;
-    margin-bottom: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 10px;
   }
   .metric {
     background: var(--bg);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 14px;
+    border-radius: 7px;
+    padding: 8px 10px;
   }
-  .metric-label { font-size: 11px; color: #ffffff; margin-bottom: 4px; }
-  .metric-val { font-size: 19px; font-weight: 500; color: var(--text); }
-  .metric-sub { font-size: 11px; color: var(--text-light); margin-top: 2px; }
-
-  /* ─── BARS ───────────────────────────────────────────── */
-  .bars-section { margin-bottom: 1.5rem; }
+  .metric-label { font-size: 10px; color: var(--text-muted); margin-bottom: 2px; }
+  .metric-val { font-size: 15px; font-weight: 500; color: var(--text); }
+  .metric-sub { font-size: 10px; color: var(--text-muted); margin-top: 1px; }
+ 
+  /* ── BARS ── */
   .bars-label {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--text);
-    margin-bottom: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
   }
-  .bar-item { margin-bottom: 10px; }
-  .bar-top { display: flex; justify-content: space-between; font-size: 13px; color: var(--green); margin-bottom: 4px; }
+  .bar-item { margin-bottom: 6px; }
+  .bar-top { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 3px; }
   .bar-top span:last-child { font-weight: 500; color: var(--text); }
-  .bar-track { height: 6px; background: var(--border); border-radius: 6px; overflow: hidden; }
-  .bar-fill { height: 100%; background: var(--green); border-radius: 6px; transition: width 0.4s cubic-bezier(.4,0,.2,1); }
-  .bar-fill.gold { background: var(--green); }
-
-  /* ─── SOURCES ────────────────────────────────────────── */
+  .bar-track { height: 5px; background: var(--border); border-radius: 5px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--green); border-radius: 5px; transition: width 0.35s cubic-bezier(.4,0,.2,1); }
+  .bar-fill.accent { background: var(--green-light); border: 1px solid #c5d9a8; }
+ 
+  /* ── SOURCES ── */
   .sources-toggle-btn {
-    background: none;
-    border: none;
+    background: none; border: none;
     font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: var(--green);
+    font-size: 11px; color: var(--green);
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 0;
-    margin-bottom: 0.5rem;
+    display: flex; align-items: center; gap: 4px;
+    padding: 0; margin-top: 8px;
   }
   .sources-toggle-btn svg { transition: transform 0.2s; }
-  .sources-toggle-btn.open svg { transform: rotate(180deg); }
+  .sources-toggle-btn.open svg:last-child { transform: rotate(180deg); }
   .sources-box {
     display: none;
     background: var(--bg);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    font-size: 12.5px;
+    border-radius: 7px;
+    padding: 9px 11px;
+    font-size: 11px;
     color: var(--text-muted);
-    line-height: 1.75;
-    margin-bottom: 1rem;
+    line-height: 1.65;
+    margin-top: 6px;
   }
   .sources-box.open { display: block; }
   .sources-box strong { color: var(--text); }
   .sources-box a { color: var(--green); text-decoration: none; }
   .sources-box a:hover { text-decoration: underline; }
-  .sources-box ul { padding-left: 1rem; }
-  .sources-box li { margin-bottom: 6px; }
-
-  /* ─── CTA ────────────────────────────────────────────── */
-  .cta-section {
-    display: flex;
-    gap: 10px;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
+  .sources-box ul { padding-left: 12px; }
+  .sources-box li { margin-bottom: 4px; }
+ 
+  .note {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    line-height: 1.5;
   }
-  .cta-primary {
-    background: var(--green);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 22px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: background 0.15s;
-  }
-  .cta-primary:hover { background: var(--green-light); }
-  .cta-secondary {
-    background: none;
-    color: var(--green);
-    border: 1.5px solid var(--green);
-    border-radius: 8px;
-    padding: 11px 20px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.15s;
-  }
-  .cta-secondary:hover { background: var(--green); }
-
-  .assumptions-note {
-    font-size: 11.5px;
-    color: var(#fffff);
-    line-height: 1.6;
-    border-top: 1px solid var(--border);
-    padding-top: 1rem;
-    margin-top: 1rem;
-  }
-
-  /* ─── FOOTER ─────────────────────────────────────────── */
-  .footer {
-    text-align: center;
-    padding: 1.5rem 1rem 2rem;
-    font-size: 12px;
-    color: var(--text-light);
-  }
-  .footer a { color: var(--green); text-decoration: none; }
-
-  @media (max-width: 540px) {
-    .tabs { grid-template-columns: 1fr; }
-    .roi-hero { flex-direction: column; }
-    .panel-body { padding: 1.25rem; }
+ 
+  @media (max-width: 580px) {
+    .panel-body { grid-template-columns: 1fr; }
+    .col-inputs { border-right: none; border-bottom: 1px solid var(--border); }
   }
 </style>
 </head>
 <body>
-
-<div class="container">
-  <div class="tabs-wrap">
-    <div class="tabs" role="tablist">
-      <button class="tab-btn active" role="tab" aria-selected="true" onclick="switchTab('coaching', this)">
-        <span class="tab-icon">🎯</span>
-        <span class="tab-name">1:1 Coaching</span>
-        <span class="tab-price">3-session package</span>
-      </button>
-      <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('workshop', this)">
-        <span class="tab-icon">💡</span>
-        <span class="tab-name">Workshop</span>
-        <span class="tab-price">$225 per session</span>
-      </button>
-      <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('cohort', this)">
-        <span class="tab-icon">🚀</span>
-        <span class="tab-name">Career Accelerator</span>
-        <span class="tab-price">6-week cohort</span>
-      </button>
+ 
+<div class="tabs" role="tablist">
+  <button class="tab-btn active" role="tab" onclick="switchTab('coaching',this)">
+    <span class="tab-icon">🎯</span>
+    <span class="tab-name">1:1 Coaching</span>
+    <span class="tab-price">3-session package</span>
+  </button>
+  <button class="tab-btn" role="tab" onclick="switchTab('workshop',this)">
+    <span class="tab-icon">💡</span>
+    <span class="tab-name">Workshop</span>
+    <span class="tab-price">$225 per session</span>
+  </button>
+  <button class="tab-btn" role="tab" onclick="switchTab('cohort',this)">
+    <span class="tab-icon">🚀</span>
+    <span class="tab-name">Career Accelerator</span>
+    <span class="tab-price">6-week cohort</span>
+  </button>
+</div>
+ 
+<!-- ===== COACHING ===== -->
+<div id="panel-coaching" class="panel active">
+  <div class="panel-card">
+    <div class="panel-header">
+      <h2>1:1 Coaching — 3-Session Package</h2>
+      <p>Promotion strategy, executive presence & career positioning · $1,020 ($340/session)</p>
     </div>
-  </div>
-
-  <!-- ===== COACHING ===== -->
-  <div id="panel-coaching" class="panel active">
-    <div class="panel-card">
-      <div class="panel-header">
-        <h2>1:1 Coaching — 3-Session Package</h2>
-        <p>Private coaching on promotion strategy, executive presence, and career positioning · Investment: $1,020 ($340/session)</p>
-      </div>
-      <div class="panel-body">
-        <div class="inputs-section">
-          <div class="inputs-label">Your situation</div>
-          <div class="slider-group">
-            <div class="slider-row-top">
-              <span class="slider-label">Current annual salary</span>
-              <span class="slider-val" id="c-salary-out">$50,000</span>
-            </div>
-            <input type="range" id="c-salary" min="50000" max="175000" step="5000" value="85000" oninput="calcCoaching()">
+    <div class="panel-body">
+      <div class="col-inputs">
+        <div class="col-label">Your situation</div>
+        <div class="slider-group">
+          <div class="slider-row-top">
+            <span class="slider-label">Current annual salary</span>
+            <span class="slider-val" id="c-salary-out">$85,000</span>
           </div>
-          <div class="slider-group">
-            <div class="slider-row-top">
-              <span class="slider-label">Expected promotion raise</span>
-              <span class="slider-val" id="c-raise-out">20%</span>
-            </div>
-            <input type="range" id="c-raise" min="10" max="35" step="1" value="20" oninput="calcCoaching()">
-          </div>
-          <div class="slider-group">
-            <div class="slider-row-top">
-              <span class="slider-label">Years to promotion (without coaching)</span>
-              <span class="slider-val" id="c-years-out">3 yrs</span>
-            </div>
-            <input type="range" id="c-years" min="1" max="5" step="1" value="3" oninput="calcCoaching()">
-          </div>
-          <div class="slider-group">
-            <div class="slider-row-top">
-              <span class="slider-label">Months coaching accelerates promotion</span>
-              <span class="slider-val" id="c-accel-out">9 mo</span>
-            </div>
-            <input type="range" id="c-accel" min="3" max="24" step="3" value="9" oninput="calcCoaching()">
-          </div>
+          <input type="range" id="c-salary" min="50000" max="175000" step="5000" value="85000" oninput="calcCoaching()">
         </div>
-
-        <hr class="results-divider">
-
+        <div class="slider-group">
+          <div class="slider-row-top">
+            <span class="slider-label">Expected promotion raise</span>
+            <span class="slider-val" id="c-raise-out">20%</span>
+          </div>
+          <input type="range" id="c-raise" min="10" max="35" step="1" value="20" oninput="calcCoaching()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-row-top">
+            <span class="slider-label">Years to promotion without coaching</span>
+            <span class="slider-val" id="c-years-out">3 yrs</span>
+          </div>
+          <input type="range" id="c-years" min="1" max="5" step="1" value="3" oninput="calcCoaching()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-row-top">
+            <span class="slider-label">Months coaching accelerates promotion</span>
+            <span class="slider-val" id="c-accel-out">9 mo</span>
+          </div>
+          <input type="range" id="c-accel" min="3" max="24" step="3" value="9" oninput="calcCoaching()">
+        </div>
+      </div>
+      <div class="col-results">
         <div class="roi-hero">
-          <div class="roi-hero-left">
-            <div class="roi-label">Estimated 5-year return on $1,020</div>
-            <div class="roi-val" id="c-roi-hero">$22,610</div>
-            <div class="roi-sub" id="c-years-remaining">Based on ~38 years remaining in your career</div>
+          <div>
+            <div class="roi-label">5-year return on $1,020</div>
+            <div class="roi-val" id="c-roi-val">$22,610</div>
+            <div class="roi-sub" id="c-roi-sub">~35 yrs remaining to age 65</div>
           </div>
           <div class="roi-badge">
             <span class="mult" id="c-mult">22×</span>
-            <span class="mult-label">return on<br>investment</span>
+            <span class="mult-label">ROI</span>
           </div>
         </div>
-
         <div class="metrics-grid">
           <div class="metric">
             <div class="metric-label">Salary gained sooner</div>
             <div class="metric-val" id="c-accel-gain">$12,750</div>
-            <div class="metric-sub">From early promotion</div>
+            <div class="metric-sub">Early promotion</div>
           </div>
           <div class="metric">
             <div class="metric-label">Annual salary lift</div>
             <div class="metric-val" id="c-annual-lift">$17,000</div>
             <div class="metric-sub">After promotion</div>
           </div>
-          <div class="metric">
-            <div class="metric-label">Lifetime career value</div>
-            <div class="metric-val" id="c-lifetime">$646,000</div>
-            <div class="metric-sub">To age 65</div>
+          <div class="metric" style="grid-column:1/-1;">
+            <div class="metric-label">Lifetime career value (to age 65)</div>
+            <div class="metric-val" id="c-lifetime">$595,000</div>
+            <div class="metric-sub">~35 remaining career years</div>
           </div>
         </div>
-
-        <div class="bars-section">
-          <div class="bars-label">5-year value breakdown</div>
-          <div id="c-bars"></div>
-        </div>
-
-        <button class="sources-toggle-btn" onclick="toggleSources('c-src', this)">
-          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <div class="bars-label">5-year breakdown</div>
+        <div id="c-bars"></div>
+        <button class="sources-toggle-btn" onclick="toggleSources('c-src',this)">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           How is this calculated?
-          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
         </button>
         <div id="c-src" class="sources-box">
-          <strong>Methodology:</strong> Promotion acceleration value is calculated as (annual salary lift ÷ 12) × months accelerated. Five-year ROI adds that to five years of the annual salary increase. Lifetime value applies the annual lift across remaining career years to 65.<br><br>
-          <strong>Data sources:</strong>
+          <strong>Methodology:</strong> Acceleration gain = (annual lift ÷ 12) × months accelerated. 5-year return = acceleration gain + (annual lift × 5). Lifetime = annual lift × years to 65.<br><br>
+          <strong>Sources:</strong>
           <ul>
-            <li><strong>Promotion salary increase (15–25%):</strong> <a href="https://www.shrm.org/topics-tools/research/total-rewards" target="_blank">SHRM Total Rewards Benchmarks</a> — HR professionals moving from Specialist to Manager typically gain 18–25% in base pay.</li>
-            <li><strong>Coaching ROI (median 7×):</strong> <a href="https://coachingfederation.org/research/global-coaching-study" target="_blank">ICF Global Coaching Study, 2019</a> — median reported ROI across coaching engagements was 7× investment.</li>
-            <li><strong>Promotion acceleration (12–18 months):</strong> <a href="https://hbr.org" target="_blank">Harvard Business Review</a> research indicates professionals with structured coaching advance to senior roles 12–18 months faster than uncoached peers.</li>
-            <li><strong>HR salary ranges:</strong> <a href="https://www.bls.gov/ooh/management/human-resources-managers.htm" target="_blank">U.S. Bureau of Labor Statistics</a> — HR Managers median $136,350; HR Specialists median $67,650 (2023).</li>
+            <li><a href="https://www.shrm.org/topics-tools/research/total-rewards" target="_blank">SHRM Total Rewards</a> — Specialist→Manager typically gains 18–25%</li>
+            <li><a href="https://coachingfederation.org/research/global-coaching-study" target="_blank">ICF Global Coaching Study 2019</a> — median coaching ROI is 7×</li>
+            <li><a href="https://hbr.org" target="_blank">Harvard Business Review</a> — coached professionals advance 12–18 months faster</li>
+            <li><a href="https://www.bls.gov/ooh/management/human-resources-managers.htm" target="_blank">BLS 2023</a> — HR Managers median $136,350; Specialists $67,650</li>
           </ul>
         </div>
-
-        <div class="assumptions-note">
-          Assumes a 3–8 year HR/TA professional, ages 25–35, with ~30–40 years to retirement at 65. Results are illustrative estimates based on published research — individual outcomes vary. Investment: $1,020 for 3-session package.
-        </div>
-
-        <div class="cta-section">
-          <a class="cta-primary" href="https://how-to-work-with-preston.youcanbook.me" target="_blank">Work With Me →</a>
-          <a class="cta-secondary" href="https://guidelinetalent.com" target="_blank">Learn More</a>
-        </div>
+        <p class="note">Results are illustrative estimates based on published research. Individual outcomes vary.</p>
       </div>
     </div>
   </div>
-
-  <!-- ===== WORKSHOP ===== -->
-  <div id="panel-workshop" class="panel">
-    <div class="panel-card">
-      <div class="panel-header">
-        <h2>Skill-Building Workshop</h2>
-        <p>One high-leverage skill per session — stack multiple workshops over time · Investment: $225 per workshop</p>
-      </div>
-      <div class="panel-body">
-        <div class="inputs-section">
-          <div class="inputs-label">Your situation</div>
-          <div class="slider-group">
-            <div class="slider-row-top">
-              <span class="slider-label">Current annual salary</span>
-              <span class="slider-val" id="w-salary-out">$50,000</span>
-            </div>
-            <input type="range" id="w-salary" min="50000" max="175000" step="5000" value="80000" oninput="calcWorkshop()">
+</div>
+ 
+<!-- ===== WORKSHOP ===== -->
+<div id="panel-workshop" class="panel">
+  <div class="panel-card">
+    <div class="panel-header">
+      <h2>Skill-Building Workshop</h2>
+      <p>One high-leverage skill per session — stack multiple over time · $225 per workshop</p>
+    </div>
+    <div class="panel-body">
+      <div class="col-inputs">
+        <div class="col-label">Your situation</div>
+        <div class="slider-group">
+          <div class="slider-row-top">
+            <span class="slider-label">Current annual salary</span>
+            <span class="slider-val" id="w-salary-out">$80,000</span>
           </div>
-          <div class="slider-group">
-            <div class="slider-row-top">
-              <span class="slider-label">Workshops attended per year</span>
-              <span class="slider-val" id="w-count-out">3</span>
-            </div>
-            <input type="range" id="w-count" min="1" max="8" step="1" value="3" oninput="calcWorkshop()">
-          </div>
-          <div class="slider-group">
-            <div class="slider-row-top">
-              <span class="slider-label">Expected annual skills premium</span>
-              <span class="slider-val" id="w-premium-out">5%</span>
-            </div>
-            <input type="range" id="w-premium" min="1" max="15" step="1" value="5" oninput="calcWorkshop()">
-          </div>
+          <input type="range" id="w-salary" min="50000" max="175000" step="5000" value="80000" oninput="calcWorkshop()">
         </div>
-
-        <hr class="results-divider">
-
+        <div class="slider-group">
+          <div class="slider-row-top">
+            <span class="slider-label">Workshops per year</span>
+            <span class="slider-val" id="w-count-out">3</span>
+          </div>
+          <input type="range" id="w-count" min="1" max="8" step="1" value="3" oninput="calcWorkshop()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-row-top">
+            <span class="slider-label">Annual skills premium</span>
+            <span class="slider-val" id="w-premium-out">5%</span>
+          </div>
+          <input type="range" id="w-premium" min="1" max="15" step="1" value="5" oninput="calcWorkshop()">
+        </div>
+      </div>
+      <div class="col-results">
         <div class="roi-hero">
-          <div class="roi-hero-left">
-            <div class="roi-label">Estimated 3-year return on workshop investment</div>
-            <div class="roi-val" id="w-roi-hero">$12,000</div>
-            <div class="roi-sub" id="w-sub">Net gain after cost of 3 workshops/year</div>
+          <div>
+            <div class="roi-label">3-year net return on workshop investment</div>
+            <div class="roi-val" id="w-roi-val">$12,000</div>
+            <div class="roi-sub" id="w-sub">After cost of 3 workshops/yr</div>
           </div>
           <div class="roi-badge">
             <span class="mult" id="w-mult">18×</span>
-            <span class="mult-label">return on<br>investment</span>
+            <span class="mult-label">ROI</span>
           </div>
         </div>
-
         <div class="metrics-grid">
           <div class="metric">
             <div class="metric-label">Annual skills premium</div>
             <div class="metric-val" id="w-annual">$4,000</div>
-            <div class="metric-sub">Earnings lift per year</div>
+            <div class="metric-sub">Earnings lift/yr</div>
           </div>
           <div class="metric">
             <div class="metric-label">Annual workshop cost</div>
             <div class="metric-val" id="w-cost">$675</div>
-            <div class="metric-sub">Your annual investment</div>
+            <div class="metric-sub">Your investment</div>
           </div>
-          <div class="metric">
-            <div class="metric-label">Lifetime career value</div>
-            <div class="metric-val" id="w-lifetime">$152,000</div>
-            <div class="metric-sub">To age 65</div>
+          <div class="metric" style="grid-column:1/-1;">
+            <div class="metric-label">Lifetime career value (to age 65)</div>
+            <div class="metric-val" id="w-lifetime">$140,000</div>
+            <div class="metric-sub">~35 remaining career years</div>
           </div>
         </div>
-
-        <div class="bars-section">
-          <div class="bars-label">Cumulative value vs. cost</div>
-          <div id="w-bars"></div>
-        </div>
-
-        <button class="sources-toggle-btn" onclick="toggleSources('w-src', this)">
-          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <div class="bars-label">Cumulative value vs. cost</div>
+        <div id="w-bars"></div>
+        <button class="sources-toggle-btn" onclick="toggleSources('w-src',this)">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           How is this calculated?
-          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
         </button>
         <div id="w-src" class="sources-box">
-          <strong>Methodology:</strong> Annual premium = current salary × skills premium %. Three-year ROI = (annual premium × 3) − (workshop cost × 3). Lifetime value = annual premium × remaining career years to 65.<br><br>
-          <strong>Data sources:</strong>
+          <strong>Methodology:</strong> Annual premium = salary × skills %. 3-year ROI = (premium × 3) − (cost × 3). Lifetime = premium × years to 65.<br><br>
+          <strong>Sources:</strong>
           <ul>
-            <li><strong>Skills premium (5–12%):</strong> <a href="https://www.weforum.org/reports/the-future-of-jobs-report-2023" target="_blank">World Economic Forum Future of Jobs 2023</a> — targeted upskilling earns professionals 5–12% above same-role peers.</li>
-            <li><strong>Promotion readiness (2.3×):</strong> <a href="https://www.linkedin.com/learning/" target="_blank">LinkedIn Learning 2023 Workplace Report</a> — professionals completing 3+ targeted programs are 2.3× more likely to be considered promotion-ready within 12 months.</li>
-            <li><strong>Workshop ROI ($4.53 per $1):</strong> <a href="https://www.td.org" target="_blank">ATD (Association for Talent Development)</a> workforce learning research showing average $4.53 return per $1 invested in targeted skills training.</li>
-            <li><strong>SHRM certification premium (12–17%):</strong> <a href="https://www.shrm.org/certification" target="_blank">SHRM research</a> — certified HR professionals earn 12–17% more than non-certified peers; workshops build toward this positioning.</li>
+            <li><a href="https://www.weforum.org/reports/the-future-of-jobs-report-2023" target="_blank">WEF Future of Jobs 2023</a> — upskilling earns 5–12% above peers</li>
+            <li><a href="https://www.linkedin.com/learning/" target="_blank">LinkedIn Learning 2023</a> — 2.3× more likely promotion-ready with 3+ programs</li>
+            <li><a href="https://www.td.org" target="_blank">ATD research</a> — $4.53 return per $1 in targeted skills training</li>
+            <li><a href="https://www.shrm.org/certification" target="_blank">SHRM</a> — certified HR pros earn 12–17% more than non-certified</li>
           </ul>
         </div>
-
-        <div class="assumptions-note">
-          Assumes a 3–8 year HR/TA professional (ages 25–35) with ~30–40 years to retirement at 65. Premium compounds modestly over time as skills stack. Results are illustrative — individual outcomes vary.
-        </div>
-
-        <div class="cta-section">
-          <a class="cta-primary" href="https://guidelinetalent.com" target="_blank">See upcoming workshops →</a>
-          <a class="cta-secondary" href="https://guidelinetalent.com" target="_blank">View all topics</a>
-        </div>
+        <p class="note">Results are illustrative estimates based on published research. Individual outcomes vary.</p>
       </div>
     </div>
   </div>
-
-  <!-- ===== COHORT ===== -->
-  <div id="panel-cohort" class="panel">
-    <div class="panel-card">
-      <div class="panel-header">
-        <h2>HR & TA Career Accelerator</h2>
-        <p>6 weeks · 6 live sessions + 3 private 1:1s · Capped at 10 professionals · Investment: $2,100</p>
-      </div>
-      <div class="panel-body">
-        <div class="inputs-section">
-          <div class="inputs-label">Your situation</div>
-          <div class="slider-group">
-            <div class="slider-row-top">
-              <span class="slider-label">Current annual salary</span>
-              <span class="slider-val" id="h-salary-out">$50,000</span>
-            </div>
-            <input type="range" id="h-salary" min="55000" max="175000" step="5000" value="90000" oninput="calcCohort()">
+</div>
+ 
+<!-- ===== COHORT ===== -->
+<div id="panel-cohort" class="panel">
+  <div class="panel-card">
+    <div class="panel-header">
+      <h2>HR & TA Career Accelerator</h2>
+      <p>6 weeks · 6 live sessions + 3 private 1:1s · Capped at 10 · $2,100 (founding price $1,600)</p>
+    </div>
+    <div class="panel-body">
+      <div class="col-inputs">
+        <div class="col-label">Your situation</div>
+        <div class="slider-group">
+          <div class="slider-row-top">
+            <span class="slider-label">Current annual salary</span>
+            <span class="slider-val" id="h-salary-out">$90,000</span>
           </div>
-          <div class="slider-group">
-            <div class="slider-row-top">
-              <span class="slider-label">Target role salary (Manager / Director)</span>
-              <span class="slider-val" id="h-target-out">$130,000</span>
-            </div>
-            <input type="range" id="h-target" min="90000" max="200000" step="5000" value="130000" oninput="calcCohort()">
-          </div>
-          <div class="slider-group">
-            <div class="slider-row-top">
-              <span class="slider-label">Years to promotion (without program)</span>
-              <span class="slider-val" id="h-years-out">4 yrs</span>
-            </div>
-            <input type="range" id="h-years" min="1" max="7" step="1" value="4" oninput="calcCohort()">
-          </div>
-          <div class="slider-group">
-            <div class="slider-row-top">
-              <span class="slider-label">Months program accelerates promotion</span>
-              <span class="slider-val" id="h-accel-out">18 mo</span>
-            </div>
-            <input type="range" id="h-accel" min="6" max="30" step="3" value="18" oninput="calcCohort()">
-          </div>
+          <input type="range" id="h-salary" min="55000" max="175000" step="5000" value="90000" oninput="calcCohort()">
         </div>
-
-        <hr class="results-divider">
-
+        <div class="slider-group">
+          <div class="slider-row-top">
+            <span class="slider-label">Target salary (Manager / Director)</span>
+            <span class="slider-val" id="h-target-out">$130,000</span>
+          </div>
+          <input type="range" id="h-target" min="90000" max="200000" step="5000" value="130000" oninput="calcCohort()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-row-top">
+            <span class="slider-label">Years to promotion without program</span>
+            <span class="slider-val" id="h-years-out">4 yrs</span>
+          </div>
+          <input type="range" id="h-years" min="1" max="7" step="1" value="4" oninput="calcCohort()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-row-top">
+            <span class="slider-label">Months program accelerates promotion</span>
+            <span class="slider-val" id="h-accel-out">18 mo</span>
+          </div>
+          <input type="range" id="h-accel" min="6" max="30" step="3" value="18" oninput="calcCohort()">
+        </div>
+      </div>
+      <div class="col-results">
         <div class="roi-hero">
-          <div class="roi-hero-left">
-            <div class="roi-label">Estimated 5-year return on $2,100 investment</div>
-            <div class="roi-val" id="h-roi-hero">$260,500</div>
-            <div class="roi-sub" id="h-sub">Founding price of $1,600 increases your ROI further</div>
+          <div>
+            <div class="roi-label">5-year return on $2,100 investment</div>
+            <div class="roi-val" id="h-roi-val">$260,500</div>
+            <div class="roi-sub" id="h-sub">Founding price $1,600 = even higher ROI</div>
           </div>
           <div class="roi-badge">
             <span class="mult" id="h-mult">51×</span>
-            <span class="mult-label">return on<br>investment</span>
+            <span class="mult-label">ROI</span>
           </div>
         </div>
-
         <div class="metrics-grid">
           <div class="metric">
             <div class="metric-label">Salary gained sooner</div>
             <div class="metric-val" id="h-accel-gain">$60,000</div>
-            <div class="metric-sub">From promotion acceleration</div>
+            <div class="metric-sub">Acceleration value</div>
           </div>
           <div class="metric">
             <div class="metric-label">Annual salary lift</div>
             <div class="metric-val" id="h-annual-lift">$40,000</div>
-            <div class="metric-sub">Current → target role</div>
+            <div class="metric-sub">Current → target</div>
           </div>
           <div class="metric">
-            <div class="metric-label">5-year earnings gap closed</div>
+            <div class="metric-label">5-yr earnings gap closed</div>
             <div class="metric-val" id="h-5yr">$200,000</div>
-            <div class="metric-sub">What delay costs you</div>
+            <div class="metric-sub">Cost of waiting</div>
           </div>
           <div class="metric">
-            <div class="metric-label">Lifetime career value</div>
-            <div class="metric-val" id="h-lifetime">$1,520,000</div>
-            <div class="metric-sub">To age 65</div>
+            <div class="metric-label">Lifetime value (to age 65)</div>
+            <div class="metric-val" id="h-lifetime">$1,400,000</div>
+            <div class="metric-sub">~35 career years</div>
           </div>
         </div>
-
-        <div class="bars-section">
-          <div class="bars-label">Where your value comes from</div>
-          <div id="h-bars"></div>
-        </div>
-
-        <button class="sources-toggle-btn" onclick="toggleSources('h-src', this)">
-          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <div class="bars-label">Where your value comes from</div>
+        <div id="h-bars"></div>
+        <button class="sources-toggle-btn" onclick="toggleSources('h-src',this)">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           How is this calculated?
-          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
         </button>
         <div id="h-src" class="sources-box">
-          <strong>Methodology:</strong> Annual lift = target salary − current salary. Acceleration gain = (annual lift ÷ 12) × months accelerated. Five-year value = acceleration gain + (annual lift × 5). Lifetime = annual lift × remaining years to age 65.<br><br>
-          <strong>Data sources:</strong>
+          <strong>Methodology:</strong> Annual lift = target − current salary. Acceleration gain = (lift ÷ 12) × months. 5-year = acceleration + (lift × 5). Lifetime = lift × years to 65.<br><br>
+          <strong>Sources:</strong>
           <ul>
-            <li><strong>HR Manager vs. Specialist salary gap:</strong> <a href="https://www.bls.gov/ooh/management/human-resources-managers.htm" target="_blank">BLS Occupational Outlook 2023</a> — HR Managers median $136,350 vs. Specialists at $67,650. TA Directors typically range $120K–$180K.</li>
-            <li><strong>Structured program promotion acceleration (12–24 months):</strong> <a href="https://hbr.org/2019/10/when-senior-leaders-coach" target="_blank">Harvard Business Review</a> — professionals in cohort programs with 1:1 mentorship advance 12–24 months faster than self-directed peers.</li>
-            <li><strong>Cohort network premium (3.5×):</strong> <a href="https://www.linkedin.com/business/talent" target="_blank">LinkedIn Economic Graph</a> — structured cohort learners gain 3.5× more career-relevant connections vs. solo learners.</li>
-            <li><strong>Executive presence premium (15–20%):</strong> <a href="https://www.ccl.org/articles/leading-effectively-articles/executive-presence/" target="_blank">Center for Creative Leadership</a> — executive presence is the #1 driver of promotion decisions for mid-senior HR leaders, linked to a 15–20% salary differential.</li>
+            <li><a href="https://www.bls.gov/ooh/management/human-resources-managers.htm" target="_blank">BLS 2023</a> — HR Managers median $136,350; TA Directors $120K–$180K</li>
+            <li><a href="https://hbr.org/2019/10/when-senior-leaders-coach" target="_blank">Harvard Business Review</a> — cohort programs accelerate promotion 12–24 months</li>
+            <li><a href="https://www.linkedin.com/business/talent" target="_blank">LinkedIn Economic Graph</a> — cohort learners gain 3.5× more career connections</li>
+            <li><a href="https://www.ccl.org/articles/leading-effectively-articles/executive-presence/" target="_blank">Center for Creative Leadership</a> — executive presence linked to 15–20% salary premium</li>
           </ul>
         </div>
-
-        <div class="assumptions-note">
-          Assumes a 3–8 year HR/TA professional (ages 25–35) with ~30–40 years remaining to retirement at 65. Lifetime value uses remaining career years × annual salary lift. Founding price of $1,600 (vs. standard $2,100) improves your ROI by an additional 31%. Results are illustrative — individual outcomes vary.
-        </div>
-
-        <div class="cta-section">
-          <a class="cta-primary" href="https://guidelinetalent.com" target="_blank">Join the waitlist →</a>
-          <a class="cta-secondary" href="https://guidelinetalent.com" target="_blank">See the curriculum</a>
-        </div>
+        <p class="note">Founding price of $1,600 improves ROI by 31%. Results are illustrative. Individual outcomes vary.</p>
       </div>
     </div>
   </div>
-
-  <div class="footer">
-    <p>© Guideline Talent · <a href="https://guidelinetalent.com" target="_blank">guidelinetalent.com</a> · Results are illustrative estimates based on published research. Individual outcomes vary.</p>
-  </div>
 </div>
-
+ 
 <script>
-  const INVESTMENT_COACHING = 1020;
-  const INVESTMENT_WORKSHOP = 225;
-  const INVESTMENT_COHORT = 2100;
-  const RETIREMENT_AGE = 65;
-  const AVG_AGE = 30; // midpoint of 3-8 yr career professional
-
-  function fmt(n) {
-    return '$' + Math.round(n).toLocaleString();
-  }
-
+  const INVEST_COACH = 1020, INVEST_WORK = 225, INVEST_COHORT = 2100;
+  const RETIRE = 65, AVG_AGE = 30;
+ 
+  function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+  function fmtMult(n) { return n < 1 ? '<1×' : n + '×'; }
+ 
   function switchTab(id, btn) {
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
@@ -681,126 +559,124 @@
     btn.classList.add('active');
     btn.setAttribute('aria-selected','true');
   }
-
+ 
   function toggleSources(id, btn) {
-    const box = document.getElementById(id);
-    box.classList.toggle('open');
+    document.getElementById(id).classList.toggle('open');
     btn.classList.toggle('open');
   }
-
-  function renderBars(containerId, items) {
-    const maxVal = Math.max(...items.map(i => i.val), 1);
-    const el = document.getElementById(containerId);
-    el.innerHTML = items.map(item => {
-      const pct = Math.round((item.val / maxVal) * 100);
+ 
+  function renderBars(id, items) {
+    const max = Math.max(...items.map(i => i.val), 1);
+    document.getElementById(id).innerHTML = items.map(item => {
+      const pct = Math.round(item.val / max * 100);
       return `<div class="bar-item">
         <div class="bar-top"><span>${item.label}</span><span>${fmt(item.val)}</span></div>
-        <div class="bar-track"><div class="bar-fill${item.gold ? ' gold' : ''}" style="width:${pct}%"></div></div>
+        <div class="bar-track"><div class="bar-fill${item.accent?' accent':''}" style="width:${pct}%"></div></div>
       </div>`;
     }).join('');
   }
-
+ 
   function calcCoaching() {
-    const salary = parseInt(document.getElementById('c-salary').value);
-    const raise = parseInt(document.getElementById('c-raise').value) / 100;
-    const years = parseInt(document.getElementById('c-years').value);
-    const accel = parseInt(document.getElementById('c-accel').value);
-
+    const salary = +document.getElementById('c-salary').value;
+    const raise  = +document.getElementById('c-raise').value / 100;
+    const years  = +document.getElementById('c-years').value;
+    const accel  = +document.getElementById('c-accel').value;
+ 
     document.getElementById('c-salary-out').textContent = fmt(salary);
-    document.getElementById('c-raise-out').textContent = Math.round(raise * 100) + '%';
-    document.getElementById('c-years-out').textContent = years + ' yr' + (years !== 1 ? 's' : '');
-    document.getElementById('c-accel-out').textContent = accel + ' mo';
-
-    const annualLift = salary * raise;
-    const accelGain = annualLift * (accel / 12);
-    const fiveYear = accelGain + annualLift * 5;
-    const remaining = RETIREMENT_AGE - AVG_AGE;
-    const lifetime = annualLift * remaining;
-    const multiplier = Math.round(fiveYear / INVESTMENT_COACHING);
-
-    document.getElementById('c-roi-hero').textContent = fmt(fiveYear);
-    document.getElementById('c-mult').textContent = multiplier + '×';
-    document.getElementById('c-years-remaining').textContent = 'Based on ~' + remaining + ' years remaining in your career (to age 65)';
-    document.getElementById('c-accel-gain').textContent = fmt(accelGain);
-    document.getElementById('c-annual-lift').textContent = fmt(annualLift);
-    document.getElementById('c-lifetime').textContent = fmt(lifetime);
-
+    document.getElementById('c-raise-out').textContent  = Math.round(raise*100) + '%';
+    document.getElementById('c-years-out').textContent  = years + ' yr' + (years!==1?'s':'');
+    document.getElementById('c-accel-out').textContent  = accel + ' mo';
+ 
+    const lift      = salary * raise;
+    const accelGain = lift * (accel / 12);
+    const fiveYr    = accelGain + lift * 5;
+    const remaining = RETIRE - AVG_AGE;
+    const lifetime  = lift * remaining;
+    const mult      = Math.round(fiveYr / INVEST_COACH);
+ 
+    document.getElementById('c-roi-val').textContent     = fmt(fiveYr);
+    document.getElementById('c-mult').textContent        = fmtMult(mult);
+    document.getElementById('c-roi-sub').textContent     = '~' + remaining + ' yrs remaining to age 65';
+    document.getElementById('c-accel-gain').textContent  = fmt(accelGain);
+    document.getElementById('c-annual-lift').textContent = fmt(lift);
+    document.getElementById('c-lifetime').textContent    = fmt(lifetime);
+ 
     renderBars('c-bars', [
-      { label: 'Salary gained from early promotion', val: accelGain },
-      { label: 'Year 1–2 salary lift', val: annualLift * 2 },
-      { label: 'Year 3–5 salary lift', val: annualLift * 3 },
-      { label: 'Investment cost', val: INVESTMENT_COACHING, gold: true }
+      { label: 'Early promotion gain', val: accelGain },
+      { label: 'Yr 1–2 salary lift',  val: lift * 2 },
+      { label: 'Yr 3–5 salary lift',  val: lift * 3 },
+      { label: 'Your investment',      val: INVEST_COACH, accent: true }
     ]);
   }
-
+ 
   function calcWorkshop() {
-    const salary = parseInt(document.getElementById('w-salary').value);
-    const count = parseInt(document.getElementById('w-count').value);
-    const premium = parseInt(document.getElementById('w-premium').value) / 100;
-
-    document.getElementById('w-salary-out').textContent = fmt(salary);
-    document.getElementById('w-count-out').textContent = count;
-    document.getElementById('w-premium-out').textContent = Math.round(premium * 100) + '%';
-
-    const annualPremium = salary * premium;
-    const annualCost = count * INVESTMENT_WORKSHOP;
-    const threeYearValue = annualPremium * 3;
-    const threeYearCost = annualCost * 3;
-    const netGain = threeYearValue - threeYearCost;
-    const remaining = RETIREMENT_AGE - AVG_AGE;
-    const lifetime = annualPremium * remaining;
-    const multiplier = annualCost > 0 ? Math.round(threeYearValue / threeYearCost) : 0;
-
-    document.getElementById('w-roi-hero').textContent = fmt(netGain);
-    document.getElementById('w-mult').textContent = multiplier + '×';
-    document.getElementById('w-sub').textContent = 'Net gain after ' + count + ' workshop' + (count !== 1 ? 's' : '') + '/year over 3 years';
-    document.getElementById('w-annual').textContent = fmt(annualPremium);
-    document.getElementById('w-cost').textContent = fmt(annualCost);
+    const salary = +document.getElementById('w-salary').value;
+    const count  = +document.getElementById('w-count').value;
+    const prem   = +document.getElementById('w-premium').value / 100;
+ 
+    document.getElementById('w-salary-out').textContent  = fmt(salary);
+    document.getElementById('w-count-out').textContent   = count;
+    document.getElementById('w-premium-out').textContent = Math.round(prem*100) + '%';
+ 
+    const annPrem     = salary * prem;
+    const annCost     = count * INVEST_WORK;
+    const threeYrVal  = annPrem * 3;
+    const threeYrCost = annCost * 3;
+    const net         = threeYrVal - threeYrCost;
+    const remaining   = RETIRE - AVG_AGE;
+    const lifetime    = annPrem * remaining;
+    const mult        = annCost > 0 ? Math.round(threeYrVal / threeYrCost) : 0;
+ 
+    document.getElementById('w-roi-val').textContent  = fmt(net);
+    document.getElementById('w-mult').textContent     = fmtMult(mult);
+    document.getElementById('w-sub').textContent      = 'After ' + count + ' workshop' + (count!==1?'s':'') + '/yr × 3 yrs';
+    document.getElementById('w-annual').textContent   = fmt(annPrem);
+    document.getElementById('w-cost').textContent     = fmt(annCost);
     document.getElementById('w-lifetime').textContent = fmt(lifetime);
-
+ 
     renderBars('w-bars', [
-      { label: 'Year 1 value', val: annualPremium },
-      { label: 'Year 2 value', val: annualPremium * 2 },
-      { label: 'Year 3 value', val: annualPremium * 3 },
-      { label: 'Total 3-year cost', val: threeYearCost, gold: true }
+      { label: 'Yr 1 earnings premium', val: annPrem },
+      { label: 'Yr 2 earnings premium', val: annPrem * 2 },
+      { label: 'Yr 3 earnings premium', val: annPrem * 3 },
+      { label: '3-yr workshop cost',    val: threeYrCost, accent: true }
     ]);
   }
-
+ 
   function calcCohort() {
-    const salary = parseInt(document.getElementById('h-salary').value);
-    const target = parseInt(document.getElementById('h-target').value);
-    const years = parseInt(document.getElementById('h-years').value);
-    const accel = parseInt(document.getElementById('h-accel').value);
-
+    const salary = +document.getElementById('h-salary').value;
+    const target = +document.getElementById('h-target').value;
+    const years  = +document.getElementById('h-years').value;
+    const accel  = +document.getElementById('h-accel').value;
+ 
     document.getElementById('h-salary-out').textContent = fmt(salary);
     document.getElementById('h-target-out').textContent = fmt(target);
-    document.getElementById('h-years-out').textContent = years + ' yr' + (years !== 1 ? 's' : '');
-    document.getElementById('h-accel-out').textContent = accel + ' mo';
-
-    const annualLift = Math.max(0, target - salary);
-    const accelGain = annualLift * (accel / 12);
-    const fiveYear = accelGain + annualLift * 5;
-    const fiveYrGap = annualLift * 5;
-    const remaining = RETIREMENT_AGE - AVG_AGE;
-    const lifetime = annualLift * remaining;
-    const multiplier = Math.round(fiveYear / INVESTMENT_COHORT);
-
-    document.getElementById('h-roi-hero').textContent = fmt(fiveYear);
-    document.getElementById('h-mult').textContent = multiplier + '×';
-    document.getElementById('h-sub').textContent = 'Founding price of $1,600 increases your ROI to ' + Math.round(fiveYear / 1600) + '×';
-    document.getElementById('h-accel-gain').textContent = fmt(accelGain);
-    document.getElementById('h-annual-lift').textContent = fmt(annualLift);
-    document.getElementById('h-5yr').textContent = fmt(fiveYrGap);
-    document.getElementById('h-lifetime').textContent = fmt(lifetime);
-
+    document.getElementById('h-years-out').textContent  = years + ' yr' + (years!==1?'s':'');
+    document.getElementById('h-accel-out').textContent  = accel + ' mo';
+ 
+    const lift      = Math.max(0, target - salary);
+    const accelGain = lift * (accel / 12);
+    const fiveYr    = accelGain + lift * 5;
+    const fiveYrGap = lift * 5;
+    const remaining = RETIRE - AVG_AGE;
+    const lifetime  = lift * remaining;
+    const mult      = fiveYr > 0 ? Math.round(fiveYr / INVEST_COHORT) : 0;
+ 
+    document.getElementById('h-roi-val').textContent     = fmt(fiveYr);
+    document.getElementById('h-mult').textContent        = fmtMult(mult);
+    document.getElementById('h-sub').textContent         = 'Founding price $1,600 = ' + Math.round(fiveYr/1600) + '× ROI';
+    document.getElementById('h-accel-gain').textContent  = fmt(accelGain);
+    document.getElementById('h-annual-lift').textContent = fmt(lift);
+    document.getElementById('h-5yr').textContent         = fmt(fiveYrGap);
+    document.getElementById('h-lifetime').textContent    = fmt(lifetime);
+ 
     renderBars('h-bars', [
-      { label: 'Promotion acceleration value', val: accelGain },
-      { label: 'Year 1–2 salary lift', val: annualLift * 2 },
-      { label: 'Year 3–5 salary lift', val: annualLift * 3 },
-      { label: 'Investment cost', val: INVESTMENT_COHORT, gold: true }
+      { label: 'Promotion acceleration', val: accelGain },
+      { label: 'Yr 1–2 salary lift',    val: lift * 2 },
+      { label: 'Yr 3–5 salary lift',    val: lift * 3 },
+      { label: 'Your investment',        val: INVEST_COHORT, accent: true }
     ]);
   }
-
+ 
   calcCoaching();
   calcWorkshop();
   calcCohort();
