@@ -13,13 +13,13 @@
     --green-light: #e6efcd;
     --green-mid: #e6efcd;
     --green-dark: #213526;
-    --gold: #c9a84c;
-    --gold-light: #fdf6e3;
+    --gold: #e6efcd;
+    --gold-light: #e6efcd;
     --text: #1c1c1c;
-    --text-muted: #666;
-    --text-light: #999;
-    --border: #e2e2dc;
-    --bg: #faf9f7;
+    --text-muted: #dfdedc;
+    --text-light: #ffffff;
+    --border: #dfdedc;
+    --bg: #ffffff;
     --white: #ffffff;
     --shadow: 0 2px 16px rgba(0,0,0,0.07);
     --shadow-lg: 0 8px 40px rgba(0,0,0,0.10);
@@ -28,7 +28,7 @@
   html { font-size: 16px; scroll-behavior: smooth; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
@@ -38,7 +38,7 @@
   /* ─── HEADER ─────────────────────────────────────────── */
   .header {
     background: var(--green-dark);
-    color: #fff;
+    color: #fffff;
     padding: 2.5rem 1.5rem 2rem;
     text-align: center;
     position: relative;
@@ -364,9 +364,9 @@
 <body>
 
 <div class="header">
-  <div class="eyebrow" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#2fa87f;margin-bottom:10px;font-weight:500;">Guideline Talent</div>
+  <div class="eyebrow" style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#e6efed;margin-bottom:10px;font-weight:500;">Guideline Talent</div>
   <h1>What's your career investment worth?</h1>
-  <p>Adjust the sliders to see the real earnings impact of investing in your HR or TA career — based on real compensation data.</p>
+  <p>Adjust the sliders to see the real earnings impact of investing in your career — based on real compensation data.</p>
 </div>
 
 <div class="container">
@@ -508,7 +508,7 @@
           <div class="slider-group">
             <div class="slider-row-top">
               <span class="slider-label">Current annual salary</span>
-              <span class="slider-val" id="w-salary-out">$80,000</span>
+              <span class="slider-val" id="w-salary-out">$50,000</span>
             </div>
             <input type="range" id="w-salary" min="50000" max="175000" step="5000" value="80000" oninput="calcWorkshop()">
           </div>
@@ -598,7 +598,7 @@
     <div class="panel-card">
       <div class="panel-header">
         <h2>HR & TA Career Accelerator Cohort</h2>
-        <p>6 weeks · 6 live sessions + 3 private 1:1s · Capped at 10 professionals · Investment: $2,100 (founding price $1,600)</p>
+        <p>6 weeks · 6 live sessions + 3 private 1:1s · Capped at 10 professionals · Investment: $2,100</p>
       </div>
       <div class="panel-body">
         <div class="inputs-section">
@@ -606,7 +606,7 @@
           <div class="slider-group">
             <div class="slider-row-top">
               <span class="slider-label">Current annual salary</span>
-              <span class="slider-val" id="h-salary-out">$90,000</span>
+              <span class="slider-val" id="h-salary-out">$50,000</span>
             </div>
             <input type="range" id="h-salary" min="55000" max="175000" step="5000" value="90000" oninput="calcCohort()">
           </div>
